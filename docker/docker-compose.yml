@@ -1,0 +1,28 @@
+version: '3.3'
+
+services:
+  trufflehog:
+    image: dxa4481/trufflehog:latest
+    command: ["truffleHog", "../"]
+
+  license-finder:
+    image: licensefinder/license_finder:latest
+    # TODO Create license-rule and mount volume.
+    command: ["license_finder", "$DEVELOP_DIR"]
+
+  gixy:
+    image: yandex/gixy:latest
+    # TODO add command (ex. docker run --rm --volumes-from nginx yandex/gixy /etc/nginx/nginx.conf)
+
+  # if used {Ruby, Node.js, Python, Go}, pls enable this sast.
+  # salus:
+  #   image: coinbase/salus:latest
+
+  # if used node.js, pls enable this sast.
+  # retire-js:
+  #   image: fhunii/retire.js:latest
+
+  # if used {Java, Scala}, pls enable this sast.
+  # find-sec-bugs:
+  # # TODO image が 250MB なので、公式の alphine base などの JDKイメージを利用したオリジナルの作成を行う
+  #   image: slimsec/findsecbugs:v0.1
